@@ -3,20 +3,20 @@ service:
   - docker
 
 before_install: 
-  - docker build -t hy/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t shayunited21/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true hy/react-test npm test -- --coverage
+  - docker run -e CI=true shayunited21/react-test npm test -- --coverage
 
 after_success: 
-  - docker build -t hy/multi-client ./client
-  - docker build -t hy/multi-nginx ./nginx
-  - docker build -t hy/multi-worker ./worker
-  - docker build -t hy/multi-server ./server
+  - docker build -t shayunited21/multi-client ./client
+  - docker build -t shayunited21/multi-nginx ./nginx
+  - docker build -t shayunited21/multi-worker ./worker
+  - docker build -t shayunited21/multi-server ./server
 # login to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 # push to docker hub
-  - docker push hy/multi-client 
-  - docker push hy/multi-nginx 
-  - docker push hy/multi-worker 
-  - docker push hy/multi-server 
+  - docker push shayunited21/multi-client 
+  - docker push shayunited21/multi-nginx 
+  - docker push shayunited21/multi-worker 
+  - docker push shayunited21/multi-server 
